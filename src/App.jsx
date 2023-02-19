@@ -26,10 +26,6 @@ const fetchPosts = gql`
 `;
 
 function App() {
-  const { loading, error, data } = useQuery(fetchPosts);
-
-  console.log("data", data);
-
   // const { theme } = useContext(ThemeContext);
 
   // console.log(
