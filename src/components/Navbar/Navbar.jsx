@@ -10,13 +10,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CloseIcon from "@material-ui/icons/Close";
 
-import "./Navbar.css";
 import { headerData } from "../../data/headerData";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
 function Navbar() {
   const { theme, setHandleDrawer } = useContext(ThemeContext);
-
   const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
@@ -143,6 +141,7 @@ function Navbar() {
           aria-label="Menu"
         />
       </div>
+
       <Drawer
         variant="temporary"
         onClose={(event, reason) => {
@@ -177,32 +176,11 @@ function Navbar() {
 
         <div onClick={handleDrawerClose}>
           <div className="navLink--container">
-            <Fade left>
-              <NavLink to="/" smooth={true} spy="true" duration={2000}>
-                <div className={classes.drawerItem}>
-                  <IoHomeSharp className={classes.drawerIcon} />
-                  <span className={classes.drawerLinks}>Home</span>
-                </div>
-              </NavLink>
-            </Fade>
+            <Fade left></Fade>
 
-            <Fade left>
-              <NavLink to="/#about" smooth={true} spy="true" duration={2000}>
-                <div className={classes.drawerItem}>
-                  <FaUser className={classes.drawerIcon} />
-                  <span className={classes.drawerLinks}>About</span>
-                </div>
-              </NavLink>
-            </Fade>
+            <Fade left></Fade>
 
-            <Fade left>
-              <NavLink to="/#resume" smooth={true} spy="true" duration={2000}>
-                <div className={classes.drawerItem}>
-                  <HiDocumentText className={classes.drawerIcon} />
-                  <span className={classes.drawerLinks}>Resume</span>
-                </div>
-              </NavLink>
-            </Fade>
+            <Fade left></Fade>
 
             <Fade left>
               <NavLink to="/#services" smooth={true} spy="true" duration={2000}>

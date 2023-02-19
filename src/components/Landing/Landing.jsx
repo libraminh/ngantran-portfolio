@@ -3,7 +3,6 @@ import { Button } from "@material-ui/core";
 import { NavHashLink as NavLink } from "react-router-hash-link";
 import { makeStyles } from "@material-ui/core/styles";
 
-import "./Landing.css";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { headerData } from "../../data/headerData";
 import { socialsData } from "../../data/socialsData";
@@ -16,11 +15,11 @@ import {
   FaBlogger,
 } from "react-icons/fa";
 import { useGetBio } from "../../hooks/useGerBio";
+import Link from "next/link";
 
 function Landing() {
   const { theme, drawerOpen } = useContext(ThemeContext);
-  const { data } = useGetBio();
-  const { bio } = data || {};
+  const { bio } = {};
 
   const useStyles = makeStyles((t) => ({
     resumeBtn: {
@@ -154,9 +153,9 @@ function Landing() {
                   <Button className={classes.resumeBtn}>Download CV</Button>
                 </a>
               )}
-              <NavLink to="/#contacts" smooth={true} spy="true" duration={2000}>
+              <a href="/#contacts" smooth={true} spy="true" duration={2000}>
                 <Button className={classes.contactBtn}>Contact</Button>
-              </NavLink>
+              </a>
             </div>
           </div>
         </div>
