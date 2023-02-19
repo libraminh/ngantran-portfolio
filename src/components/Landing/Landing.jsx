@@ -139,11 +139,15 @@ function Landing() {
           style={{ backgroundColor: theme.secondary }}
         >
           <div className="lcr--content" style={{ color: theme.tertiary }}>
-            <h6>{bio?.positionTitle}</h6>
-            <h1>{bio?.displayName}</h1>
-            <div dangerouslySetInnerHTML={{ __html: bio?.description.html }} />
+            <div className="mb-5">
+              <h6>{bio?.positionTitle}</h6>
+              <h1>{bio?.displayName}</h1>
+              <div
+                dangerouslySetInnerHTML={{ __html: bio?.description.html }}
+              />
+            </div>
 
-            <div className="lcr-buttonContainer">
+            <div className="space-x-5 ">
               {headerData.resumePdf && (
                 <a
                   href={headerData.resumePdf}
@@ -154,6 +158,7 @@ function Landing() {
                   <Button className={classes.resumeBtn}>Download CV</Button>
                 </a>
               )}
+
               <NavLink to="/#contacts" smooth={true} spy="true" duration={2000}>
                 <Button className={classes.contactBtn}>Contact</Button>
               </NavLink>

@@ -18,6 +18,5 @@ const fetchBio = gql`
 
 export const useGetBio = () => {
   const { loading, error, data } = useQuery(fetchBio);
-
   return { loading, error, data };
 };

@@ -1,36 +1,55 @@
-import React,{useContext} from 'react';
+import React, { useContext } from "react";
+import { ThemeContext } from "../../contexts/ThemeContext";
+import "./Experience.css";
+import { gql, useQuery } from "@apollo/client";
+import ExperienceCard from "./ExperienceCard";
 
-import { ThemeContext } from '../../contexts/ThemeContext';
-
-import './Experience.css';
-
-import { experienceData } from '../../data/experienceData'
-import ExperienceCard from './ExperienceCard';
+const fetchExperiences = gql`
+  query Experiences {
+    experiences {
+      company
+      content {
+        html
+      }
+      date
+      id
+      position
+    }
+  }
+`;
 
 function Experience() {
+  const { theme } = useContext(ThemeContext);
+  const { data } = useQuery(fetchExperiences);
+  const experiences = data?.experiences || [];
 
-    const { theme } = useContext(ThemeContext);
-    return (
-        <div className="experience" id="experience" style={{backgroundColor: theme.secondary}}> 
-             <div className="experience-body">
-                 <div className="experience-image">
-                     <img src={theme.expimg} alt="" />
-                 </div>
-                 <div className="experience-description">
-                    <h1 style={{color:theme.primary}}>Experience</h1>
-                    {experienceData.map(exp =>(
-                        <ExperienceCard 
-                            key={exp.id}
-                            id={exp.id}
-                            jobtitle={exp.jobtitle}
-                            company={exp.company}
-                            startYear={exp.startYear}
-                            endYear={exp.endYear}/>
-                    ))}
-                 </div>
-             </div>
+  return (
+    <div
+      className="experience py-10"
+      id="experience"
+      style={{ backgroundColor: theme.secondary }}
+    >
+      <div className="experience-body md:space-x-10">
+        <div className="experience-image">
+          <img src={theme.expimg} alt="" />
         </div>
-    )
+
+        <div className="experience-description">
+          <h1 style={{ color: theme.primary }}>Experience</h1>
+          {experiences.map((exp) => (
+            <ExperienceCard
+              key={exp.id}
+              id={exp.id}
+              jobtitle={exp.position}
+              company={exp.company}
+              date={exp.date}
+              content={exp.content.html}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default Experience
+export default Experience;

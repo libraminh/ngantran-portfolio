@@ -18,6 +18,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer {
+  .font-poppins {
+    font-family: var(--primaryFont);
+  }
+}
+
 /* scrollBar */
 ::-webkit-scrollbar {
   width: 10px;

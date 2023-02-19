@@ -12,7 +12,7 @@ function About() {
 
   return (
     <div
-      className="about"
+      className="about py-10"
       id="about"
       style={{ backgroundColor: theme.secondary }}
     >

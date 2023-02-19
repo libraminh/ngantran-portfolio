@@ -1,38 +1,49 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
+import { ThemeContext } from "../../contexts/ThemeContext";
+import "./Education.css";
+import EducationCard from "./EducationCard";
+import { gql, useQuery } from "@apollo/client";
 
-import { ThemeContext } from '../../contexts/ThemeContext';
-
-import './Education.css'
-import EducationCard from './EducationCard';
-
-import { educationData } from '../../data/educationData'
+const fetchEducation = gql`
+  query EDUCATION {
+    educations {
+      id
+      title
+      subTitle
+      date
+    }
+  }
+`;
 
 function Education() {
+  const { theme } = useContext(ThemeContext);
+  const { data } = useQuery(fetchEducation);
 
-    const { theme } = useContext(ThemeContext);
-    return (
-        <div className="education" id="resume" style={{backgroundColor: theme.secondary}}>
-           
-            <div className="education-body">
-                <div className="education-description">
-                <h1 style={{color:theme.primary}}>Education</h1>
-                    {educationData.map(edu => (
-                        <EducationCard 
-                            key={edu.id}
-                            id={edu.id}
-                            institution={edu.institution}
-                            course={edu.course}
-                            startYear={edu.startYear}
-                            endYear={edu.endYear}
-                        />
-                    ))}
-                </div>
-                <div className="education-image">
-                    <img src={theme.eduimg} alt=""/>
-                </div>
-            </div>
+  return (
+    <div
+      className="education py-10"
+      id="resume"
+      style={{ backgroundColor: theme.secondary }}
+    >
+      <div className="education-body">
+        <div className="education-description">
+          <h1 style={{ color: theme.primary }}>Education</h1>
+          {data?.educations?.map((edu) => (
+            <EducationCard
+              key={edu.id}
+              id={edu.id}
+              institution={edu.subTitle}
+              course={edu.title}
+              date={edu.date}
+            />
+          ))}
         </div>
-    )
+        <div className="education-image">
+          <img src={theme.eduimg} alt="" />
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default Education
+export default Education;
