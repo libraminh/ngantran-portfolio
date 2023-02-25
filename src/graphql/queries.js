@@ -4,7 +4,6 @@ export const fetchBio = gql`
   query BIO {
     bio(where: { id: "cleb2c83bwylo0blr45u94dhj" }) {
       displayName
-      positionTitle
       description {
         html
       }
@@ -12,6 +11,18 @@ export const fetchBio = gql`
       wiaContent {
         html
       }
+      positionName
+    }
+  }
+`;
+
+export const fetchSocial = gql`
+  query Social {
+    social(where: { id: "ckxj6dmpcgi2t0b05d096vamn" }) {
+      id
+      phoneNumber
+      linkedinUrl
+      emailAddress
     }
   }
 `;
