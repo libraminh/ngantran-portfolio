@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 
-import "./About.css";
+import { useQuery } from "@apollo/client";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { aboutData } from "../../data/aboutData";
-import { useGetBio } from "../../hooks/useGerBio";
+import { fetchBio } from "../../graphql/queries";
+import "./About.css";
 
 function About() {
   const { theme } = useContext(ThemeContext);
-  const { data } = useGetBio();
+  const { data } = useQuery(fetchBio);
   const { bio } = data || {};
 
   return (

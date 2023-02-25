@@ -37,7 +37,7 @@ function ExperienceCard({ id, company, jobtitle, date, content }) {
           <AccordionSummary
             className="w-full !p-0 "
             expandIcon={
-              <ExpandMoreIcon className="text-4xl fill-white bg-white rounded-full" />
+              <ExpandMoreIcon className="text-4xl text-white bg-[#e56f9d] rounded-full" />
             }
             aria-controls="panel1a-content"
             id="panel1a-header"
@@ -59,7 +59,7 @@ function ExperienceCard({ id, company, jobtitle, date, content }) {
             </div>
           </AccordionSummary>
 
-          <AccordionDetails className="experience-details !w-full font-poppins">
+          <AccordionDetails className="experience-details !w-full font-poppins prose !px-0 !ml-0">
             <div
               className="text-white text-lg"
               dangerouslySetInnerHTML={{ __html: content }}

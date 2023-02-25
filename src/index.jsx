@@ -19,5 +19,5 @@ ReactDOM.render(
       <App />
     </ThemeContextProvider>
   </ApolloProvider>,
-  document.getElementById("root")
+  document.getElementById("sipmoon")
 );

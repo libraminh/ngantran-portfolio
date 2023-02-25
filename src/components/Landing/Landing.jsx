@@ -1,25 +1,28 @@
-import React, { useContext } from "react";
 import { Button } from "@material-ui/core";
-import { NavHashLink as NavLink } from "react-router-hash-link";
 import { makeStyles } from "@material-ui/core/styles";
+import React, { useContext } from "react";
+import { NavHashLink as NavLink } from "react-router-hash-link";
 
-import "./Landing.css";
+import SipMoonImage from "../../assets/sipmoon.jpg";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { headerData } from "../../data/headerData";
 import { socialsData } from "../../data/socialsData";
+import "./Landing.css";
 
+import { useQuery } from "@apollo/client";
 import {
-  FaTwitter,
-  FaLinkedin,
-  FaGithub,
-  FaYoutube,
   FaBlogger,
+  FaGithub,
+  FaLinkedin,
+  FaTwitter,
+  FaYoutube,
 } from "react-icons/fa";
-import { useGetBio } from "../../hooks/useGerBio";
+import { fetchBio } from "../../graphql/queries";
+import { TypeAnimation } from "react-type-animation";
 
 function Landing() {
   const { theme, drawerOpen } = useContext(ThemeContext);
-  const { data } = useGetBio();
+  const { data } = useQuery(fetchBio);
   const { bio } = data || {};
 
   const useStyles = makeStyles((t) => ({
@@ -126,7 +129,7 @@ function Landing() {
           </div>
         </div>
         <img
-          src={headerData.image}
+          src={SipMoonImage}
           alt=""
           className="landing--img"
           style={{
@@ -140,7 +143,24 @@ function Landing() {
         >
           <div className="lcr--content" style={{ color: theme.tertiary }}>
             <div className="mb-5">
-              <h6>{bio?.positionTitle}</h6>
+              {/* {bio?.positionTitle} */}
+
+              <TypeAnimation
+                // Same String at the start will only be typed once, initially
+                sequence={[
+                  "Content Creator",
+                  1000,
+                  "Marketing Executive",
+                  1000,
+                  "Digital Designer",
+                  1000,
+                  "Event Planner",
+                  1000,
+                ]}
+                speed={50} // Custom Speed from 1-99 - Default Speed: 40
+                wrapper="h6" // Animation will be rendered as a <span>
+                repeat={Infinity} // Repeat this Animation Sequence infinitely
+              />
               <h1>{bio?.displayName}</h1>
               <div
                 dangerouslySetInnerHTML={{ __html: bio?.description.html }}
