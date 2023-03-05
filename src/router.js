@@ -3,5 +3,5 @@ export const routePaths = {
   projects: "/projects",
   project: "/projects/:slug",
   blog: "/blog",
-  blog: "/blog/:slug",
+  blogDetail: "/blog/:slug",
 };

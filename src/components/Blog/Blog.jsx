@@ -8,9 +8,14 @@ import { ThemeContext } from "../../contexts/ThemeContext";
 import { blogData } from "../../data/blogData";
 import SingleBlog from "./SingleBlog/SingleBlog";
 import { routePaths } from "../../router";
+import { useQuery } from "@apollo/client";
+import BaseLoader from "../Loader";
+import { fetchPosts } from "../../graphql/queries";
 
 function Blog() {
   const { theme } = useContext(ThemeContext);
+  const { data, loading } = useQuery(fetchPosts);
+  const { posts } = data || [];
 
   const useStyles = makeStyles(() => ({
     viewAllBtn: {
@@ -39,6 +44,8 @@ function Blog() {
 
   const classes = useStyles();
 
+  if (loading) return <BaseLoader />;
+
   return (
     <>
       {blogData.length > 0 && (
@@ -52,21 +59,9 @@ function Blog() {
           </div>
           <div className="blog--body">
             <div className="blog--bodyContainer">
-              {blogData
-                .slice(0, 3)
-                .reverse()
-                .map((blog) => (
-                  <SingleBlog
-                    theme={theme}
-                    title={blog.title}
-                    desc={blog.description}
-                    date={blog.date}
-                    image={blog.image}
-                    url={blog.url}
-                    key={blog.id}
-                    id={blog.id}
-                  />
-                ))}
+              {posts?.slice(0, 3).map((post) => (
+                <SingleBlog theme={theme} post={post} key={post.id} />
+              ))}
             </div>
 
             {blogData.length > 3 && (

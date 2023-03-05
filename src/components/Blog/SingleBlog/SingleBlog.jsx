@@ -1,33 +1,42 @@
 import React from "react";
 import Fade from "react-reveal/Fade";
+import { Link } from "react-router-dom";
 
 import placeholder from "../../../assets/png/placeholder.png";
+import { routePaths } from "../../../router";
 import "./SingleBlog.css";
 
-function SingleBlog({ theme, title, desc, date, image, url, id }) {
+function SingleBlog({ post, theme }) {
   return (
     <Fade bottom>
-      <a
+      <Link
         className="singleBlog"
-        key={id}
-        href={url}
-        target="_blank"
-        rel="noreferrer"
+        key={post.id}
+        to={`${routePaths.blog}/${post.slug}`}
         style={{ backgroundColor: theme.primary400 }}
       >
         <div
           className="singleBlog--image"
           style={{ backgroundColor: theme.secondary }}
         >
-          <img src={image ? image : placeholder} alt={title} />
+          <img
+            src={post.coverImage ? post.coverImage.url : placeholder}
+            alt={post.title}
+          />
         </div>
 
-        <div className="singleBlog--body text-white">
-          <p>{date}</p>
-          <h3>{title}</h3>
-          <h6>{desc}</h6>
+        <div className="singleBlog--body text-white w-full">
+          <p>{post.date}</p>
+          <h3>{post.title}</h3>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: post.content
+                ? post.content?.html.substring(0, 100) + "..."
+                : "Sample Content",
+            }}
+          />
         </div>
-      </a>
+      </Link>
     </Fade>
   );
 }

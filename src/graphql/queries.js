@@ -70,6 +70,7 @@ export const fetchProjects = gql`
     }
   }
 `;
+
 export const fetchProject = gql`
   query Project($slug: String!) {
     project(where: { slug: $slug }) {
@@ -95,6 +96,42 @@ export const fetchEducation = gql`
       title
       subTitle
       date
+    }
+  }
+`;
+
+export const fetchPosts = gql`
+  query Posts {
+    posts {
+      id
+      slug
+      date
+      title
+      content {
+        raw
+        html
+      }
+      coverImage {
+        url
+      }
+    }
+  }
+`;
+
+export const fetchPost = gql`
+  query Post($slug: String!) {
+    post(where: { slug: $slug }) {
+      id
+      slug
+      date
+      title
+      content {
+        raw
+        html
+      }
+      coverImage {
+        url
+      }
     }
   }
 `;
