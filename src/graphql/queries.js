@@ -60,7 +60,27 @@ export const fetchProjects = gql`
       name
       slug
       tags
-      description
+      content {
+        raw
+        html
+      }
+      image {
+        url
+      }
+    }
+  }
+`;
+export const fetchProject = gql`
+  query Project($slug: String!) {
+    project(where: { slug: $slug }) {
+      name
+      tags
+      content {
+        raw
+        html
+      }
+      slug
+      id
       image {
         url
       }

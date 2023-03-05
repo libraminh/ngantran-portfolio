@@ -63,8 +63,9 @@ function Projects() {
                   theme={theme}
                   key={project.id}
                   id={project.slug}
+                  slug={project.slug}
                   name={project.name}
-                  desc={project.description}
+                  content={project.content}
                   tags={project.tags}
                   image={project.image[0].url}
                 />

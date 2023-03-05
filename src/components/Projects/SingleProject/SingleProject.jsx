@@ -2,11 +2,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { FaEye } from "react-icons/fa";
 import Fade from "react-reveal/Fade";
+import { Link } from "react-router-dom";
 
 import placeholder from "../../../assets/png/placeholder.png";
+import { routePaths } from "../../../router";
 import "./SingleProject.css";
 
-function SingleProject({ id, name, desc, tags, image, theme }) {
+function SingleProject({ id, slug, name, content, tags, image, theme }) {
   const useStyles = makeStyles((t) => ({
     iconBtn: {
       display: "flex",
@@ -36,7 +38,8 @@ function SingleProject({ id, name, desc, tags, image, theme }) {
 
   return (
     <Fade bottom>
-      <div
+      <Link
+        to={`${routePaths.projects}/${slug}`}
         key={id}
         className="singleProject"
         style={{ backgroundColor: theme.primary400 }}
@@ -54,21 +57,13 @@ function SingleProject({ id, name, desc, tags, image, theme }) {
           />
 
           <div className="project--showcaseBtn">
-            <a
-              href={"/"}
-              target="_blank"
-              rel="noreferrer"
-              className={classes.iconBtn}
-              aria-labelledby={`${name.replace(" ", "-").toLowerCase()} ${name
-                .replace(" ", "-")
-                .toLowerCase()}-demo`}
-            >
+            <span className={classes.iconBtn}>
               <FaEye
                 id={`${name.replace(" ", "-").toLowerCase()}-demo`}
                 className={classes.icon}
                 aria-label="Demo"
               />
-            </a>
+            </span>
             {/* <a
               href={code}
               target="_blank"
@@ -87,15 +82,16 @@ function SingleProject({ id, name, desc, tags, image, theme }) {
           </div>
         </div>
 
-        <p
+        <div
           className="project--desc"
           style={{
             background: theme.secondary,
             color: theme.tertiary,
           }}
-        >
-          {desc.substring(0, 100) + "..."}
-        </p>
+          dangerouslySetInnerHTML={{
+            __html: content.html.substring(0, 100) + "...",
+          }}
+        />
 
         {!!tags.length && (
           <div
@@ -110,7 +106,7 @@ function SingleProject({ id, name, desc, tags, image, theme }) {
             ))}
           </div>
         )}
-      </div>
+      </Link>
     </Fade>
   );
 }

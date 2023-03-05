@@ -1,29 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
+  Redirect,
   Route,
   Switch,
-  Redirect,
 } from "react-router-dom";
 
-import { ThemeContext } from "./contexts/ThemeContext";
-import { Main, BlogPage, ProjectPage } from "./pages";
-import { BackToTop } from "./components";
-import ScrollToTop from "./utils/ScrollToTop";
-import { useQuery, gql } from "@apollo/client";
 import "./App.css";
-
-const fetchPosts = gql`
-  query allPosts {
-    posts {
-      date
-      id
-      slug
-      tags
-      title
-    }
-  }
-`;
+import { BackToTop } from "./components";
+import { BlogPage, Main, ProjectPage } from "./pages";
+import ProjectDetail from "./pages/ProjectDetail/ProjectDetail";
+import { routePaths } from "./router";
+import ScrollToTop from "./utils/ScrollToTop";
 
 function App() {
   // const { theme } = useContext(ThemeContext);
@@ -43,11 +31,12 @@ function App() {
       <Router>
         <ScrollToTop />
         <Switch>
-          <Route path="/" exact component={Main} />
+          <Route path={routePaths.home} exact component={Main} />
           <Route path="/blog" exact component={BlogPage} />
-          <Route path="/projects" exact component={ProjectPage} />
+          <Route path={routePaths.projects} exact component={ProjectPage} />
+          <Route path={routePaths.project} exact component={ProjectDetail} />
 
-          <Redirect to="/" />
+          <Redirect to={routePaths.home} />
         </Switch>
       </Router>
       <BackToTop />
