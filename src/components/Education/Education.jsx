@@ -1,23 +1,17 @@
+import { useQuery } from "@apollo/client";
 import React, { useContext } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import { fetchEducation } from "../../graphql/queries";
+import BaseLoader from "../Loader";
 import "./Education.css";
 import EducationCard from "./EducationCard";
-import { gql, useQuery } from "@apollo/client";
-
-const fetchEducation = gql`
-  query EDUCATION {
-    educations {
-      id
-      title
-      subTitle
-      date
-    }
-  }
-`;
 
 function Education() {
   const { theme } = useContext(ThemeContext);
-  const { data } = useQuery(fetchEducation);
+  const { data, loading } = useQuery(fetchEducation);
+  const { educations } = data || [];
+
+  if (loading) return <BaseLoader />;
 
   return (
     <div
@@ -28,7 +22,7 @@ function Education() {
       <div className="education-body">
         <div className="education-description">
           <h1 style={{ color: theme.primary }}>Education</h1>
-          {data?.educations?.map((edu) => (
+          {educations?.map((edu) => (
             <EducationCard
               key={edu.id}
               id={edu.id}

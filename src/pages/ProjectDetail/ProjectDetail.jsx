@@ -5,12 +5,12 @@ import { AiOutlineHome } from "react-icons/ai";
 import { Link, useParams } from "react-router-dom";
 
 import { useQuery } from "@apollo/client";
+import { RichText } from "@graphcms/rich-text-react-renderer";
 import BaseLoader from "../../components/Loader";
 import { ThemeContext } from "../../contexts/ThemeContext";
-import { headerData } from "../../data/headerData";
 import { fetchProject } from "../../graphql/queries";
-import { RichText } from "@graphcms/rich-text-react-renderer";
 
+import { routePaths } from "../../router";
 import "./ProjectPage.css";
 
 function ProjectDetail() {
@@ -21,8 +21,6 @@ function ProjectDetail() {
     variables: { slug },
   });
   const project = data?.project || {};
-
-  console.log("project", project);
 
   const useStyles = makeStyles((t) => ({
     search: {
@@ -80,19 +78,20 @@ function ProjectDetail() {
   return (
     <div className="projectPage" style={{ backgroundColor: theme.secondary }}>
       <Helmet>
-        <title>{headerData.name} | Projects</title>
+        <title>Projects - {project.name}</title>
       </Helmet>
+
       <div
         className="projectPage-header"
         style={{ backgroundColor: theme.primary }}
       >
-        <Link to="/">
+        <Link to={routePaths.home}>
           <AiOutlineHome className={classes.home} />
         </Link>
         <h1 style={{ color: theme.secondary }}>{project.name}</h1>
       </div>
 
-      <div className="container mx-auto py-10 space-y-5">
+      <div className="container mx-auto py-10 px-4 space-y-5">
         <img
           className="mx-auto aspect-[16/9] w-full h-full object-cover object-center max-w-4xl"
           src={project?.image[0]?.url}
@@ -100,48 +99,9 @@ function ProjectDetail() {
         />
 
         <div className="prose text-white mx-auto">
-          <RichText
-            className="prose text-white"
-            content={project.content.raw.children}
-          />
+          <RichText content={project.content.raw.children} />
         </div>
       </div>
-
-      {/* <div className="projectPage-container">
-        <div className="projectPage-search">
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search project..."
-            className={classes.search}
-          />
-        </div>
-
-        <div className="project-container">
-          <Grid
-            className="project-grid"
-            container
-            direction="row"
-            alignItems="center"
-            justifyContent="center"
-          >
-            {filteredArticles.map((project) => (
-              <SingleProject
-                theme={theme}
-                key={project.id}
-                id={project.id}
-                name={project.projectName}
-                desc={project.projectDesc}
-                tags={project.tags}
-                code={project.code}
-                demo={project.demo}
-                image={project.image}
-              />
-            ))}
-          </Grid>
-        </div>
-      </div> */}
     </div>
   );
 }

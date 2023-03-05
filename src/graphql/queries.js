@@ -87,3 +87,14 @@ export const fetchProject = gql`
     }
   }
 `;
+
+export const fetchEducation = gql`
+  query EDUCATION {
+    educations {
+      id
+      title
+      subTitle
+      date
+    }
+  }
+`;

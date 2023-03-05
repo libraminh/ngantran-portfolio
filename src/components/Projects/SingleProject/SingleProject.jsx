@@ -64,21 +64,6 @@ function SingleProject({ id, slug, name, content, tags, image, theme }) {
                 aria-label="Demo"
               />
             </span>
-            {/* <a
-              href={code}
-              target="_blank"
-              rel="noreferrer"
-              className={classes.iconBtn}
-              aria-labelledby={`${name.replace(" ", "-").toLowerCase()} ${name
-                .replace(" ", "-")
-                .toLowerCase()}-code`}
-            >
-              <FaCode
-                id={`${name.replace(" ", "-").toLowerCase()}-code`}
-                className={classes.icon}
-                aria-label="Code"
-              />
-            </a> */}
           </div>
         </div>
 
