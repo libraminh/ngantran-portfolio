@@ -98,7 +98,7 @@ function ProjectDetail() {
           alt=""
         />
 
-        <div className="prose text-white mx-auto">
+        <div className="prose text-white mx-auto max-w-none">
           <RichText content={project.content.raw.children} />
         </div>
       </div>

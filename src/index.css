@@ -22,6 +22,10 @@
   .font-poppins {
     font-family: var(--primaryFont);
   }
+
+  .font-bestermind {
+    font-family: "BestermindRegular";
+  }
 }
 
 /* scrollBar */
