@@ -8,7 +8,16 @@ import placeholder from "../../../assets/png/placeholder.png";
 import { routePaths } from "../../../router";
 import "./SingleProject.css";
 
-function SingleProject({ id, slug, name, content, tags, image, theme }) {
+function SingleProject({
+  id,
+  slug,
+  name,
+  content,
+  tags,
+  image,
+  theme,
+  excerpt,
+}) {
   const useStyles = makeStyles((t) => ({
     iconBtn: {
       display: "flex",
@@ -45,13 +54,17 @@ function SingleProject({ id, slug, name, content, tags, image, theme }) {
         style={{ backgroundColor: theme.primary400 }}
       >
         <div className="projectContent">
-          <h2 id={id} style={{ color: theme.tertiary }}>
+          <h2
+            id={id}
+            style={{ color: theme.tertiary }}
+            className="text-base font-semibold text-center"
+          >
             {name}
           </h2>
 
           <img
             FaEye
-            className="object-cover object-center rounded-lg"
+            className="object-cover object-center rounded-lg aspect-[4/3]"
             src={image ? image : placeholder}
             alt={name}
           />
@@ -74,7 +87,7 @@ function SingleProject({ id, slug, name, content, tags, image, theme }) {
             color: theme.tertiary,
           }}
           dangerouslySetInnerHTML={{
-            __html: content.html.substring(0, 100) + "...",
+            __html: excerpt.html.substring(0, 100) + "...",
           }}
         />
 

@@ -83,12 +83,12 @@
   margin: 1rem 0;
 }
 
-.lcr--content p {
+/* .lcr--content p {
   margin-top: 1.45rem;
   font-weight: 500;
   font-size: 1.15rem;
   opacity: 0.7;
-}
+} */
 
 .lcr-buttonContainer {
   margin-top: 2rem;
@@ -115,12 +115,12 @@
     font-size: 3rem;
   }
 
-  .lcr--content p {
+  /* .lcr--content p {
     margin-top: 0.3rem;
     margin-bottom: 1rem;
     font-weight: 500;
     font-size: 1rem;
-  }
+  } */
 
   .lcr-buttonContainer {
     margin-top: 1rem;
@@ -201,12 +201,12 @@
     font-size: 2.5rem;
     text-align: center;
   }
-  .lcr--content p {
+  /* .lcr--content p {
     font-size: 0.95rem;
     text-align: center;
     margin: 0 auto;
     width: 90%;
-  }
+  } */
   .lcr-buttonContainer {
     margin: 0 auto;
     display: flex;

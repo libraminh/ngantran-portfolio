@@ -76,6 +76,7 @@ function ProjectPage() {
       <Helmet>
         <title>{headerData.name} | Projects</title>
       </Helmet>
+
       <div
         className="projectPage-header"
         style={{ backgroundColor: theme.primary }}

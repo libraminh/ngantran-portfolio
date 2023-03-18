@@ -1,7 +1,6 @@
-import { Button, Tooltip } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useContext } from "react";
-import { NavHashLink as NavLink } from "react-router-hash-link";
 
 import SipMoonImage from "../../assets/sipmoon.jpg";
 import { ThemeContext } from "../../contexts/ThemeContext";
@@ -10,18 +9,15 @@ import "./Landing.css";
 
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { FaEnvelope, FaLinkedin, FaMobileAlt } from "react-icons/fa";
 import { TypeAnimation } from "react-type-animation";
-import { fetchBio, fetchSocial } from "../../graphql/queries";
+import { fetchBio } from "../../graphql/queries";
+import SocialLinks from "../SocialLinks";
 
 function Landing() {
   const [positionSequence, setPositionSequence] = useState([]);
   const { theme, drawerOpen } = useContext(ThemeContext);
   const { data } = useQuery(fetchBio);
   const { bio } = data || {};
-
-  const { data: socialData } = useQuery(fetchSocial);
-  const { social } = socialData || {};
 
   const useStyles = makeStyles((t) => ({
     resumeBtn: {
@@ -87,49 +83,7 @@ function Landing() {
           style={{ backgroundColor: theme.primary }}
         >
           <div className="lcl--content">
-            {social?.linkedinUrl && (
-              <Tooltip title="Ngan Tran">
-                <a href={social.linkedinUrl} target="_blank" rel="noreferrer">
-                  <FaLinkedin
-                    className="landing--social"
-                    style={{ color: theme.secondary }}
-                    aria-label="LinkedIn"
-                  />
-                </a>
-              </Tooltip>
-            )}
-
-            {social?.emailAddress && (
-              <Tooltip title={social.emailAddress}>
-                <a
-                  href={`mailto:${social.emailAddress}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <FaEnvelope
-                    className="landing--social"
-                    style={{ color: theme.secondary }}
-                    aria-label="LinkedIn"
-                  />
-                </a>
-              </Tooltip>
-            )}
-
-            {social?.phoneNumber && (
-              <Tooltip title={social.phoneNumber}>
-                <a
-                  href={`tel:${social.phoneNumber}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <FaMobileAlt
-                    className="landing--social"
-                    style={{ color: theme.secondary }}
-                    aria-label="LinkedIn"
-                  />
-                </a>
-              </Tooltip>
-            )}
+            <SocialLinks />
           </div>
         </div>
 
@@ -144,7 +98,7 @@ function Landing() {
         />
 
         <div
-          className="landing--container-right"
+          className="landing--container-right text-center md:text-left"
           style={{ backgroundColor: theme.secondary }}
         >
           <div className="lcr--content" style={{ color: theme.tertiary }}>
@@ -159,7 +113,9 @@ function Landing() {
               )}
 
               <h1>{bio?.displayName}</h1>
+
               <div
+                className="space-y-2"
                 dangerouslySetInnerHTML={{ __html: bio?.description.html }}
               />
             </div>
@@ -176,9 +132,9 @@ function Landing() {
                 </a>
               )}
 
-              <NavLink to="/#contacts" smooth={true} spy="true" duration={2000}>
+              {/* <NavLink to="/#contacts" smooth={true} spy="true" duration={2000}>
                 <Button className={classes.contactBtn}>Contact</Button>
-              </NavLink>
+              </NavLink> */}
             </div>
           </div>
         </div>

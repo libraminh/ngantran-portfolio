@@ -87,7 +87,7 @@ function Navbar() {
       height: "60px",
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-evenly",
+      justifyContent: "center",
       padding: "0 30px",
       boxSizing: "border-box",
       border: "2px solid",
@@ -105,7 +105,7 @@ function Navbar() {
     },
     drawerLinks: {
       fontFamily: "var(--primaryFont)",
-      width: "50%",
+      // width: "50%",
       fontSize: "1.3rem",
       fontWeight: 600,
       [t.breakpoints.down("sm")]: {
@@ -113,6 +113,8 @@ function Navbar() {
       },
     },
     drawerIcon: {
+      display: "none",
+      flexBasis: "40px",
       fontSize: "1.6rem",
       [t.breakpoints.down("sm")]: {
         fontSize: "1.385rem",
@@ -179,7 +181,7 @@ function Navbar() {
           <div className="navLink--container">
             <Fade left>
               <NavLink to="/" smooth={true} spy="true" duration={2000}>
-                <div className={classes.drawerItem}>
+                <div className={`${classes.drawerItem} space-x-2`}>
                   <IoHomeSharp className={classes.drawerIcon} />
                   <span className={classes.drawerLinks}>Home</span>
                 </div>
@@ -188,7 +190,7 @@ function Navbar() {
 
             <Fade left>
               <NavLink to="/#about" smooth={true} spy="true" duration={2000}>
-                <div className={classes.drawerItem}>
+                <div className={`${classes.drawerItem} space-x-2`}>
                   <FaUser className={classes.drawerIcon} />
                   <span className={classes.drawerLinks}>About</span>
                 </div>
@@ -196,26 +198,31 @@ function Navbar() {
             </Fade>
 
             <Fade left>
-              <NavLink to="/#resume" smooth={true} spy="true" duration={2000}>
-                <div className={classes.drawerItem}>
+              <NavLink
+                to="/#experience"
+                smooth={true}
+                spy="true"
+                duration={2000}
+              >
+                <div className={`${classes.drawerItem} space-x-2`}>
                   <HiDocumentText className={classes.drawerIcon} />
-                  <span className={classes.drawerLinks}>Resume</span>
+                  <span className={classes.drawerLinks}>Experiences</span>
                 </div>
               </NavLink>
             </Fade>
 
             <Fade left>
-              <NavLink to="/#services" smooth={true} spy="true" duration={2000}>
-                <div className={classes.drawerItem}>
+              <NavLink to="/#projects" smooth={true} spy="true" duration={2000}>
+                <div className={`${classes.drawerItem} space-x-2`}>
                   <BsFillGearFill className={classes.drawerIcon} />
-                  <span className={classes.drawerLinks}>Services</span>
+                  <span className={classes.drawerLinks}>Projects</span>
                 </div>
               </NavLink>
             </Fade>
 
             <Fade left>
               <NavLink to="/#blog" smooth={true} spy="true" duration={2000}>
-                <div className={classes.drawerItem}>
+                <div className={`${classes.drawerItem} space-x-2`}>
                   <FaFolderOpen className={classes.drawerIcon} />
                   <span className={classes.drawerLinks}>Blog</span>
                 </div>
@@ -224,7 +231,7 @@ function Navbar() {
 
             <Fade left>
               <NavLink to="/#contacts" smooth={true} spy="true" duration={2000}>
-                <div className={classes.drawerItem}>
+                <div className={`${classes.drawerItem} space-x-2`}>
                   <MdPhone className={classes.drawerIcon} />
                   <span className={classes.drawerLinks}>Contact</span>
                 </div>

@@ -66,6 +66,7 @@ function Projects() {
                   slug={project.slug}
                   name={project.name}
                   content={project.content}
+                  excerpt={project.excerpt}
                   tags={project.tags}
                   image={project.image[0].url}
                 />

@@ -32,7 +32,7 @@ function About() {
         ></div>
       </div>
       <div className="about-body">
-        <div className="about-description">
+        <div className="about-description text-center md:text-left">
           <h2 style={{ color: theme.primary }}>{bio?.wiaTitle}</h2>
 
           <div

@@ -64,6 +64,10 @@ export const fetchProjects = gql`
         raw
         html
       }
+      excerpt {
+        raw
+        html
+      }
       image {
         url
       }

@@ -59,9 +59,9 @@ function ExperienceCard({ id, company, jobtitle, date, content }) {
             </div>
           </AccordionSummary>
 
-          <AccordionDetails className="experience-details !w-full font-poppins prose !px-0 !ml-0">
+          <AccordionDetails className="experience-details !w-full font-poppins prose prose-strong:text-white !px-0 !ml-0">
             <div
-              className="text-white text-lg"
+              className="text-white text-sm md:text-lg"
               dangerouslySetInnerHTML={{ __html: content }}
             />
           </AccordionDetails>

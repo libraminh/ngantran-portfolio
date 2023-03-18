@@ -1,27 +1,12 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core";
 import React, { useContext } from "react";
-import { Helmet } from "react-helmet";
 import { AiOutlineHome } from "react-icons/ai";
-import { Link, useParams } from "react-router-dom";
-
-import { useQuery } from "@apollo/client";
-import { RichText } from "@graphcms/rich-text-react-renderer";
-import BaseLoader from "../../components/Loader";
+import { Link } from "react-router-dom";
 import { ThemeContext } from "../../contexts/ThemeContext";
-import { fetchPost } from "../../graphql/queries";
-
 import { routePaths } from "../../router";
-import { SectionHeader } from "../../components/SectionHeader";
 
-function BlogDetail() {
+export const SectionHeader = ({ name }) => {
   const { theme } = useContext(ThemeContext);
-  const { slug } = useParams();
-
-  const { data, loading } = useQuery(fetchPost, {
-    variables: { slug },
-  });
-  const post = data?.post || {};
-
   const useStyles = makeStyles((t) => ({
     search: {
       color: theme.tertiary,
@@ -70,42 +55,20 @@ function BlogDetail() {
       },
     },
   }));
-
   const classes = useStyles();
 
-  if (loading) return <BaseLoader />;
-
   return (
-    <div className="projectPage" style={{ backgroundColor: theme.secondary }}>
-      <Helmet>
-        <title>Blog - {post.title}</title>
-      </Helmet>
+    <div
+      className="projectPage-header px-4"
+      style={{ backgroundColor: theme.primary }}
+    >
+      <Link to={routePaths.home}>
+        <AiOutlineHome className={classes.home} />
+      </Link>
 
-      <SectionHeader name={post.title} />
-
-      {/* <div
-        className="projectPage-header"
-        style={{ backgroundColor: theme.primary }}
-      >
-        <Link to={routePaths.home}>
-          <AiOutlineHome className={classes.home} />
-        </Link>
-        <h1 style={{ color: theme.secondary }}>{post.title}</h1>
-      </div> */}
-
-      <div className="container mx-auto py-10 px-4 space-y-5">
-        <img
-          className="mx-auto aspect-[16/9] w-full h-full object-cover object-center max-w-4xl"
-          src={post.coverImage.url}
-          alt=""
-        />
-
-        <div className="prose text-white mx-auto">
-          <RichText content={post.content.raw.children} />
-        </div>
-      </div>
+      <h1 className="text-white font-semibold text-center text-xl md:text-3xl lg:text-5xl">
+        {name}
+      </h1>
     </div>
   );
-}
-
-export default BlogDetail;
+};
